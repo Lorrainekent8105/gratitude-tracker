@@ -95,13 +95,6 @@ function renderEntries() {
   }
 }
 
-  if (entries.length < 5) {
-    counter.textContent = `You've added ${entries.length} today — ${5 - entries.length} more to go.`;
-  } else {
-    counter.textContent = `You've reached your goal of 5 today 🙌`;
-  }
-}
-
 function addGratitude() {
   const input = document.getElementById("gratitudeInput");
   const text = input.value.trim();
@@ -133,11 +126,6 @@ function toggleHistory() {
     div.style.display = "block";
   } else {
     div.style.display = "none";
-  }
-
-  localStorage.setItem(streakKey, newStreak);
-  localStorage.setItem(lastDateKey, today);
-  document.getElementById("streakDisplay").textContent = `Streak: ${newStreak} day${newStreak > 1 ? "s" : ""}`;
 }
 let selectedMood = 0;
 
