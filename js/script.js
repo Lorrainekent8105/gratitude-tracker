@@ -56,13 +56,14 @@ function loadEntries() {
   return data[key] || [];
 }
 
-function saveEntry(text) {
+function saveEntry(text, mood) {
   const key = getTodayKey();
   let data = JSON.parse(localStorage.getItem("gratitudes") || "{}");
   if (!data[key]) data[key] = [];
-  data[key].push(text);
+  data[key].push({ text, mood });
   localStorage.setItem("gratitudes", JSON.stringify(data));
 }
+
 
 function renderEntries() {
   const list = document.getElementById("todayList");
@@ -101,13 +102,25 @@ function renderEntries() {
 function addGratitude() {
   const input = document.getElementById("gratitudeInput");
   const text = input.value.trim();
-  if (text) {
-    saveEntry(text);
+  if (text && selectedMood > 0) {
+    saveEntry(text, selectedMood);
     input.value = "";
+    selectedMood = 0;
+
+    // Remove selection styling
+    document.querySelectorAll(".mood-selector span").forEach(span => {
+      span.classList.remove("selected");
+    });
+
     renderEntries();
     updateStreak();
+  } else if (!text) {
+    alert("Please write what you're grateful for.");
+  } else {
+    alert("Please select a candle mood.");
   }
 }
+
 
 // --- History Toggle ---
 function toggleHistory() {
