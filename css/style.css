@@ -110,3 +110,28 @@ li {
     transform: translateX(-50%) scale(1.03);
   }
 }
+.flicker-title {
+  text-shadow:
+    0 0 5px #fceabb,
+    0 0 10px #fbc27b,
+    0 0 15px #ffddaa,
+    0 0 25px rgba(255, 220, 180, 0.6);
+  animation: titleFlicker 4s ease-in-out infinite;
+}
+
+@keyframes titleFlicker {
+  0%, 100% {
+    text-shadow:
+      0 0 5px #fceabb,
+      0 0 10px #fbc27b,
+      0 0 15px #ffddaa,
+      0 0 25px rgba(255, 220, 180, 0.6);
+  }
+  50% {
+    text-shadow:
+      0 0 3px #fceabb,
+      0 0 8px #fbc27b,
+      0 0 10px #ffddaa,
+      0 0 20px rgba(255, 220, 180, 0.4);
+  }
+}
