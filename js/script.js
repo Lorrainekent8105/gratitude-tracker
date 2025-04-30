@@ -66,5 +66,16 @@ function toggleHistory() {
         div.style.display = 'none';
     }
 }
-
 document.addEventListener('DOMContentLoaded', renderEntries);
+// Typing animation for the title
+const text = "✨ Find Five";
+let i = 0;
+
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("title").textContent += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 100);
+  }
+}
+typeWriter();
