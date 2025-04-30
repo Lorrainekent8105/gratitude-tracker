@@ -6,19 +6,20 @@
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
 </head>
-  <p id="streakDisplay" class="streak">Streak: 0 days</p>
 <body>
   <div class="candle-glow"></div>
   <div class="container">
     <h1 id="title"></h1>
     <p class="description">Write down 5 small things you’re grateful for today.</p>
+
     <div class="mood-selector">
-  <span data-mood="1">🕯️</span>
-  <span data-mood="2">🕯️🕯️</span>
-  <span data-mood="3">🕯️🕯️🕯️</span>
-  <span data-mood="4">🕯️🕯️🕯️🕯️</span>
-  <span data-mood="5">🕯️🕯️🕯️🕯️🕯️</span>
-</div>
+      <span data-mood="1">🕯️</span>
+      <span data-mood="2">🕯️🕯️</span>
+      <span data-mood="3">🕯️🕯️🕯️</span>
+      <span data-mood="4">🕯️🕯️🕯️🕯️</span>
+      <span data-mood="5">🕯️🕯️🕯️🕯️🕯️</span>
+    </div>
+
     <input type="text" id="gratitudeInput" placeholder="I'm grateful for...">
     <button onclick="addGratitude()">Add</button>
     <p id="counterMsg"></p>
@@ -26,7 +27,12 @@
 
     <button class="history-toggle" onclick="toggleHistory()">Show Past Entries</button>
     <div id="history" style="display: none;"></div>
+
+    <!-- ✅ Moved here -->
+    <p id="streakDisplay" class="streak">Streak: 0 days</p>
   </div>
+
   <script src="js/script.js"></script>
 </body>
 </html>
+
