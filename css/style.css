@@ -18,6 +18,34 @@ body {
   position: relative;
   z-index: 1;
 }
+.mood-label {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #d7c3a7;
+  margin-bottom: 0.4rem;
+  text-align: center;
+}
+
+.mood-selector {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.mood-selector span {
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.mood-selector span:hover {
+  transform: scale(1.3);
+}
+
+.mood-selector .selected {
+  text-shadow: 0 0 5px #ffddaa;
+}
 
 h1 {
   text-align: center;
