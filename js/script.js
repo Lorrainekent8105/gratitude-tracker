@@ -3,10 +3,14 @@ const text = "✨ Find Five";
 let i = 0;
 
 function typeWriter() {
+  const title = document.getElementById("title");
+  if (!title) return;
   if (i < text.length) {
-    document.getElementById("title").textContent += text.charAt(i);
+    title.textContent += text.charAt(i);
     i++;
     setTimeout(typeWriter, 100);
+  } else {
+    title.classList.add("flicker-title");
   }
 }
 
@@ -72,7 +76,6 @@ function renderEntries() {
   entries.forEach((item) => {
     const li = document.createElement("li");
 
-    // If the item is a string (from old data), convert it to object format
     let text = "";
     let mood = 0;
 
@@ -117,7 +120,7 @@ function toggleHistory() {
       if (date !== todayKey) {
         html += `<strong>${date}</strong><ul>`;
         allData[date].forEach((e) => {
-          html += `<li>${e}</li>`;
+          html += `<li>${typeof e === "string" ? e : e.text}</li>`;
         });
         html += "</ul>";
       }
@@ -126,7 +129,10 @@ function toggleHistory() {
     div.style.display = "block";
   } else {
     div.style.display = "none";
+  }
 }
+
+// --- Mood Selector ---
 let selectedMood = 0;
 
 function setupMoodSelector() {
@@ -139,6 +145,8 @@ function setupMoodSelector() {
     });
   });
 }
+
+// --- Calendar View ---
 function toggleCalendar() {
   const calendarDiv = document.getElementById("calendarView");
   if (calendarDiv.style.display === "none") {
