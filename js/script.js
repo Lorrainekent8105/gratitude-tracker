@@ -112,6 +112,48 @@ function toggleHistory() {
     div.style.display = "none";
   }
 }
+function updateStreak() {
+  const streakKey = "gratitude-streak";
+  const lastDateKey = "gratitude-lastDate";
+  const today = new Date().toISOString().split("T")[0];
+
+  const storedStreak = parseInt(localStorage.getItem(streakKey)) || 0;
+  const lastDate = localStorage.getItem(lastDateKey);
+
+  let newStreak = storedStreak;
+
+  if (!lastDate) {
+    newStreak = 1;
+  } else {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yString = yesterday.toISOString().split("T")[0];
+
+    if (lastDate === today) {
+      newStreak = storedStreak;
+    } else if (lastDate === yString) {
+      newStreak += 1;
+    } else {
+      newStreak = 1;
+    }
+  }
+
+  localStorage.setItem(streakKey, newStreak);
+  localStorage.setItem(lastDateKey, today);
+  document.getElementById("streakDisplay").textContent = `Streak: ${newStreak} day${newStreak > 1 ? "s" : ""}`;
+}
+let selectedMood = 0;
+
+function setupMoodSelector() {
+  const moodSpans = document.querySelectorAll(".mood-selector span");
+  moodSpans.forEach(span => {
+    span.addEventListener("click", () => {
+      moodSpans.forEach(s => s.classList.remove("selected"));
+      span.classList.add("selected");
+      selectedMood = parseInt(span.dataset.mood);
+    });
+  });
+}
 
 // --- Initialize Everything on Page Load ---
 document.addEventListener("DOMContentLoaded", function () {
