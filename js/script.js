@@ -9,6 +9,7 @@ function loadEntries() {
     const data = JSON.parse(localStorage.getItem('gratitudes') || '{}');
     return data[key] || [];
 }
+
 function addEntry() {
   const input = document.getElementById("entryInput");
   const text = input.value.trim();
