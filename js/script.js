@@ -64,13 +64,37 @@ function saveEntry(text) {
 function renderEntries() {
   const list = document.getElementById("todayList");
   const counter = document.getElementById("counterMsg");
-  const entries = loadEntries();
+
+  const allData = JSON.parse(localStorage.getItem("gratitudes") || "{}");
+  const entries = allData[getTodayKey()] || [];
+
   list.innerHTML = "";
+
   entries.forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = item;
+
+    // If the item is a string (from old data), convert it to object format
+    let text = "";
+    let mood = 0;
+
+    if (typeof item === "string") {
+      text = item;
+    } else {
+      text = item.text || "";
+      mood = item.mood || 0;
+    }
+
+    const candles = "🕯️".repeat(mood);
+    li.textContent = `${candles} ${text}`;
     list.appendChild(li);
   });
+
+  if (entries.length < 5) {
+    counter.textContent = `You've added ${entries.length} today — ${5 - entries.length} more to go.`;
+  } else {
+    counter.textContent = `You've reached your goal of 5 today 🙌`;
+  }
+}
 
   if (entries.length < 5) {
     counter.textContent = `You've added ${entries.length} today — ${5 - entries.length} more to go.`;
