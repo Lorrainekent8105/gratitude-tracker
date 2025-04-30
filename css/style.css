@@ -4,7 +4,7 @@ body {
   padding: 0;
   font-family: 'Libre Baskerville', serif;
   background: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-  background-color: #f6f3ef;
+  background-color: #e7dfd8;
   color: #2c2c2c;
 }
 
@@ -20,7 +20,7 @@ body {
 h1 {
   text-align: center;
   font-size: 2.8rem;
-  color: #4b2e2e;
+  color: #3a2c29;
   margin-bottom: 0.5rem;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -47,7 +47,7 @@ button {
   padding: 0.7rem 1rem;
   font-size: 1rem;
   margin-left: 0.5rem;
-  background-color: #6b4c3b;
+  background-color: #4a3227;
   color: white;
   border: none;
   border-radius: 5px;
@@ -55,7 +55,7 @@ button {
 }
 
 button:hover {
-  background-color: #4a3227;
+  background-color: #32211a;
 }
 
 ul {
@@ -67,6 +67,8 @@ ul {
 li {
   padding: 0.5rem 0;
   border-bottom: 1px solid #ddd;
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
 
 .history-toggle {
