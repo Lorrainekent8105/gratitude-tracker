@@ -9,7 +9,6 @@ function typeWriter() {
     setTimeout(typeWriter, 100);
   }
 }
-typeWriter();
 
 // --- Utility ---
 function getTodayKey() {
@@ -201,5 +200,6 @@ document.addEventListener("DOMContentLoaded", function () {
   renderEntries();
   updateStreak();
   setupMoodSelector();
+  typeWriter();
 });
 
