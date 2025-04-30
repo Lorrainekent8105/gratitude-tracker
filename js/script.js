@@ -10,18 +10,6 @@ function loadEntries() {
     return data[key] || [];
 }
 
-function addEntry() {
-  const input = document.getElementById("entryInput");
-  const text = input.value.trim();
-  if (text) {
-    const entryDiv = document.createElement("div");
-    entryDiv.textContent = text;
-    document.getElementById("entriesContainer").appendChild(entryDiv);
-    input.value = "";
-
-    updateStreak(); // update streak when entry is added
-  }
-
 function saveEntry(text) {
     const key = getTodayKey();
     let data = JSON.parse(localStorage.getItem('gratitudes') || '{}');
