@@ -135,32 +135,6 @@ function toggleHistory() {
   } else {
     div.style.display = "none";
   }
-}
-function updateStreak() {
-  const streakKey = "gratitude-streak";
-  const lastDateKey = "gratitude-lastDate";
-  const today = new Date().toISOString().split("T")[0];
-
-  const storedStreak = parseInt(localStorage.getItem(streakKey)) || 0;
-  const lastDate = localStorage.getItem(lastDateKey);
-
-  let newStreak = storedStreak;
-
-  if (!lastDate) {
-    newStreak = 1;
-  } else {
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yString = yesterday.toISOString().split("T")[0];
-
-    if (lastDate === today) {
-      newStreak = storedStreak;
-    } else if (lastDate === yString) {
-      newStreak += 1;
-    } else {
-      newStreak = 1;
-    }
-  }
 
   localStorage.setItem(streakKey, newStreak);
   localStorage.setItem(lastDateKey, today);
@@ -178,10 +152,54 @@ function setupMoodSelector() {
     });
   });
 }
+function toggleCalendar() {
+  const calendarDiv = document.getElementById("calendarView");
+  if (calendarDiv.style.display === "none") {
+    renderCalendar();
+    calendarDiv.style.display = "block";
+  } else {
+    calendarDiv.style.display = "none";
+  }
+}
+
+function renderCalendar() {
+  const data = JSON.parse(localStorage.getItem("gratitudes") || "{}");
+  const calendarDiv = document.getElementById("calendarView");
+  calendarDiv.innerHTML = "";
+
+  const keys = Object.keys(data).sort((a, b) => new Date(b) - new Date(a));
+
+  if (keys.length === 0) {
+    calendarDiv.innerHTML = "<p>No entries yet.</p>";
+    return;
+  }
+
+  keys.forEach((date) => {
+    const dayDiv = document.createElement("div");
+    dayDiv.className = "calendar-day";
+    dayDiv.textContent = date;
+
+    dayDiv.addEventListener("click", () => {
+      const entries = data[date];
+      let html = `<div class="calendar-entries"><strong>${date}</strong><ul>`;
+      entries.forEach((item) => {
+        const text = typeof item === "string" ? item : item.text;
+        const mood = typeof item === "string" ? 0 : item.mood || 0;
+        const candles = "🕯️".repeat(mood);
+        html += `<li>${candles} ${text}</li>`;
+      });
+      html += "</ul></div>";
+      calendarDiv.innerHTML = html;
+    });
+
+    calendarDiv.appendChild(dayDiv);
+  });
+}
 
 // --- Initialize Everything on Page Load ---
 document.addEventListener("DOMContentLoaded", function () {
   renderEntries();
   updateStreak();
+  setupMoodSelector();
 });
 
